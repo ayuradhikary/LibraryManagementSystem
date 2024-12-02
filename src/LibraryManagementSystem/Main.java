@@ -81,10 +81,18 @@ public class Main implements Utilities {
                 switch (userInput) {
                     case 1:
                         Utilities.displayBooks(manager);
-                        break;
+                        if (Utilities.continueOrBreak().equals("logout")) {
+                            return;
+                        } else {
+                            break;
+                        }
                     case 2:
                         Utilities.borrowBooks(currentUser, manager);
-                        break;
+                        if (Utilities.continueOrBreak().equals("logout")) {
+                            return;
+                        } else {
+                            break;
+                        }
                     default:
                         System.out.println("wrong input");
                         break;
