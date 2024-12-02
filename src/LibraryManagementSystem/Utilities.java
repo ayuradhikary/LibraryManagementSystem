@@ -1,6 +1,9 @@
 package LibraryManagementSystem;
 
+import java.util.Scanner;
+
 public interface Utilities {
+
     static void createUser(String currentUser, String Currentpassword, String newUser, String newUserPassword,
             boolean overwrite) {
         try {
@@ -11,40 +14,51 @@ public interface Utilities {
 
     }
 
-    static void addBook(String book, String currentUser) {
-        BookManager bm = new BookManager();
+    static void addBook(String currentUser, BookManager manager) {
+        Scanner ob = new Scanner(System.in);
+        System.out.println("please enter the name of the book you would like to add: ");
+        String book = ob.nextLine();
         try {
-            bm.addBook(book, currentUser);
+            manager.addBook(book, currentUser);
         } catch (ExceptionHandler ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    static void deleteBook(String book, String currentUser) {
-        BookManager b = new BookManager();
+    static void deleteBook(String currentUser, BookManager manager) {
         try {
-            b.deleteBook(book, currentUser);
+            manager.deleteBook(currentUser);
         } catch (ExceptionHandler ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    static void displayBooks() {
+    static void displayBooks(BookManager manager) {
         try {
-            BookManager b = new BookManager();
-            b.loadBooks();
-            b.displayBooks();
+            manager.displayBooks();
         } catch (ExceptionHandler ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    static void borrowBooks(String currentUser, String book) {
-        BookManager bm = new BookManager();
+    static void borrowBooks(String currentUser, BookManager manager) {
         try {
-            bm.borrowBooks(currentUser, book);
+            manager.borrowBooks(currentUser);
         } catch (ExceptionHandler ex) {
             System.out.println(ex.getMessage());
         }
     }
+
+    static String continueOrBreak() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("would you like to continue? :");
+        System.out.println("If no than 'logout' to exit else press any key: ");
+        String decision = sc.next();
+        if (decision.equals("logout")) {
+            return "logout";
+        } else {
+            return "continue";
+        }
+    }
+
 }
