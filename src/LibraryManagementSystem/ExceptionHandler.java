@@ -26,3 +26,4 @@ public class ExceptionHandler extends Exception {
         return new ExceptionHandler("Invalid Input: " + message);
     }
 }
+ 

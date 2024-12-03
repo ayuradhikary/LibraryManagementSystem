@@ -2,6 +2,8 @@ package LibraryManagementSystem;
 
 import java.util.Scanner;
 
+import javax.sound.sampled.SourceDataLine;
+
 public class Main implements Utilities {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -23,8 +25,8 @@ public class Main implements Utilities {
 
             try {
                 currentUser = UserManager.validateUser(userName, Currentpassword);
-            } catch (ExceptionHandler ex) {
-                System.out.println(ex.getMessage());
+            } catch (Exception ex) {
+                System.out.println(ex);
             }
             if (currentUser.equals("admin")) {
                 System.out.println("As an admin you can :- ");
@@ -74,7 +76,7 @@ public class Main implements Utilities {
                             break;
                         }
                 }
-            } else {
+            } else if (currentUser.equals("user")) {
                 System.out.println("As a user you can:- ");
                 System.out.println("1. Display books (press 1) 2. Borrow Books (press 2)");
                 int userInput = sc.nextInt();
@@ -97,6 +99,9 @@ public class Main implements Utilities {
                         System.out.println("wrong input");
                         break;
                 }
+            } else {
+                System.out.println(currentUser);
+                break;
             }
         }
     }

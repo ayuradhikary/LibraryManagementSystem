@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.sound.sampled.SourceDataLine;
+
+import javax.sound.sampled.SourceDataLine;
+
 public class BookManager {
     private List<String> books; // = new ArrayList<>();
     // private String currentUser;
@@ -53,12 +57,8 @@ public class BookManager {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             System.out.println("Before foor loop" + books);
             for (String book : books) {
-                // writer.write(books.get(books.size() - 1));
-                System.out.println("before writing: " + books);
                 writer.write(book);
-
                 writer.newLine();
-                System.out.println("After writing : " + books);
             }
         } catch (Exception ex) {
             throw ExceptionHandler.fileWriteException("Invalid request");
@@ -67,10 +67,8 @@ public class BookManager {
 
     public void deleteBook(String currentUser) throws ExceptionHandler {
         if (currentUser.equals("admin")) {
-            System.out.println("Delete book is triggered");
-            System.out.println("List of available books before deletion:");
-            System.out.println(books);
-            displayBooks(); // Show books before deletion
+            System.out.println("Here is the list of books: ");
+            displayBooks();
             System.out.println("Please enter the name of the book you want to delete: ");
             Scanner sc = new Scanner(System.in);
             String book = sc.next();
@@ -78,9 +76,7 @@ public class BookManager {
             if (books.contains(book)) {
                 System.out.println("Book found, deleting: " + book);
                 books.remove(book);
-                System.out.println("List of available books after deletion:");
-                displayBooks(); // Show books after deletion
-                saveBooks(); // Save updated list to the file
+                saveBooks();
                 System.out.println("Book deleted successfully.");
             } else {
                 System.out.println("Could not find the book to delete.");
